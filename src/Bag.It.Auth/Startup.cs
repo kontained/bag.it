@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -7,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Bag.It.Models;
-using Bag.It.Interfaces.Services.Auth;
-using Bag.It.Services.Auth;
 
 namespace Bag.It.Auth
 {
@@ -29,7 +26,8 @@ namespace Bag.It.Auth
             services
                 .AddCors()
                 .Configure<AuthSettings>(Configuration.GetSection("Authentication"))
-                .AddTransient<IAuthenticationSevice, AuthenticationService>()
+                .Configure<DatabaseSettings>(Configuration.GetSection("DatabaseSettings"))
+                .AddBagIt(Configuration)
                 .AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
