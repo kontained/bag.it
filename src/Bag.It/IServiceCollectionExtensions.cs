@@ -2,7 +2,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Bag.It.Services.Auth;
+using Bag.It.Services.Users;
 using Bag.It.Interfaces.Services.Auth;
+using Bag.It.Interfaces.Services.Users;
 using Bag.It.Models;
 
 namespace Bag.It
@@ -22,6 +24,7 @@ namespace Bag.It
                         }
                     );
                 })
-                .AddTransient<IAuthenticationSevice, AuthenticationService>();
+                .AddTransient<IAuthenticationSevice, AuthenticationService>()
+                .AddTransient<IUserService, UserService>();
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Options;
@@ -26,9 +25,9 @@ namespace Bag.It.Services.Auth
             {
                 Subject = new ClaimsIdentity(new Claim[] 
                 {
-                    new Claim(ClaimTypes.Name, "BitchBoiName"),
-                    new Claim(ClaimTypes.Actor, "BitchBoiActor"),
-                    new Claim(ClaimTypes.NameIdentifier, "BithBoiIdentifier")
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Actor, user.Username),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id)
                 }),
 
                 Issuer = _authSettings.Value.Issuer,
